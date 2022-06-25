@@ -31,7 +31,6 @@ Route::group([
     ROute::resource('users'           , 'UserController');
     Route::get('admins'               , 'UserController@indexAdmin')->name('admin.index');
     Route::resource('products'        , 'ProductController');
-    Route::PUT('updateImage'          , 'ProductController@updateImage')->name('product.updateImage');
     Route::resource('car_category'    , 'CarCategoryController');
     Route::resource('type_category'   , 'TypeCategoryController');
     Route::resource('filter_category' , 'FilterCategoryController');

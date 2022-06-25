@@ -1,5 +1,6 @@
 <?php
 
+// use App\Http\Controllers\Api\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+route::post('getCode', 'Auth\LoginController@getCode');
+route::post('login', 'Auth\LoginController@loginByCode');
+route::post('register', Auth\RegisterController::class);
+
+Route::middleware('auth:api')->post('logout', function (Request $request) {
+
+    if (auth()->user()) {
+        $user = auth()->user();
+        $user->api_token = null; // clear api token
+        $user->code = '';
+        $user->save();
+
+        return response()->json([
+            'message' => 'Thank you for using our application',
+        ]);
+    }
+
+    return response()->json([
+        'error' => 'Unable to logout user',
+        'code' => 401,
+    ], 401);
+});
+
+Route::group(['middleware' => 'auth:api', 'namespace' => 'Client'], function () {
+    Route::get('profile', 'ProfileController@show');
+    Route::post('profile/update', 'ProfileController@update');
 });

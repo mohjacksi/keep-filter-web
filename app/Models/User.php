@@ -12,7 +12,9 @@ use Laratrust\Traits\LaratrustUserTrait;
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'api_token',
     ];
 
     /**
@@ -43,4 +46,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function registerUser($request): self
+    {
+        $this->name = $request->username;
+        $this->phone = $request->phone;
+        $this->location = $request->location;
+        $code = rand(5000, 999999);
+        $this->code = $code;
+        $this->save();
+        // $data = ['code' => $this->code, 'username' => $this->name, 'phone' => $this->phone];
+        return $this;
+    }
 }

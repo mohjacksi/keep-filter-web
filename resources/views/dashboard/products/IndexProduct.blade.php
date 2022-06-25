@@ -1,36 +1,36 @@
 @extends('dashboard.layouts.masterDash')
 @section('title') المنتجات @endsection
 @section('css')
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
-        <style>
-            input[type="file"] {
-    display: block;
-    }
-    .imageThumb {
-    max-height: 75px;
-    border: 2px solid;
-    padding: 1px;
-    cursor: pointer;
-    }
-    .pip {
-    display: inline-block;
-    margin: 10px 10px 0 0;
-    }
-    .remove {
-    display: block;
-    background: #444;
-    border: 1px solid black;
-    color: white;
-    text-align: center;
-    cursor: pointer;
-    }
-    .remove:hover {
-    background: white;
-    color: black;
-    }
-        </style>
+    <style>
+        input[type="file"] {
+  display: block;
+}
+.imageThumb {
+  max-height: 75px;
+  border: 2px solid;
+  padding: 1px;
+  cursor: pointer;
+}
+.pip {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+.remove {
+  display: block;
+  background: #444;
+  border: 1px solid black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.remove:hover {
+  background: white;
+  color: black;
+}
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 @endsection
 @section('content')
@@ -148,32 +148,51 @@
 @endsection
 
 @section('js')
+    {{-- <script>
+        function previewMultiple(event){
+        var saida = document.getElementById("adicionafoto");
+        var quantos = saida.files.length;
+        for(i = 0; i < quantos; i++){
+            var urls = URL.createObjectURL(event.target.files[i]);
+            document.getElementById("galeria").innerHTML += '<img src="'+urls+'">';
+        }
+    }
+    </script> --}}
+
     <script>
-                    $(document).ready(function() {
-            if (window.File && window.FileList && window.FileReader) {
-                $("#files").on("change", function(e) {
-                var files = e.target.files,
-                    filesLength = files.length;
-                for (var i = 0; i < filesLength; i++) {
-                    var f = files[i]
-                    var fileReader = new FileReader();
-                    fileReader.onload = (function(e) {
-                    var file = e.target;
-                    $("<span class=\"pip\">" +
-                        "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                        "<br/><span class=\"remove\">إزاله</span>" +
-                        "</span>").insertAfter("#files");
-                    $(".remove").click(function(){
-                        $(this).parent(".pip").remove();
-                    });
-                    });
-                    fileReader.readAsDataURL(f);
-                }
-                console.log(files);
-                });
-            } else {
-                alert("Your browser doesn't support to File API")
-            }
-            });
+        $(document).ready(function() {
+  if (window.File && window.FileList && window.FileReader) {
+    $("#files").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+          $("<span class=\"pip\">" +
+            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\">إزاله</span>" +
+            "</span>").insertAfter("#files");
+          $(".remove").click(function(){
+            $(this).parent(".pip").remove();
+          });
+          
+          // Old code here
+          /*$("<img></img>", {
+            class: "imageThumb",
+            src: e.target.result,
+            title: file.name + " | Click to remove"
+          }).insertAfter("#files").click(function(){$(this).remove();});*/
+          
+        });
+        fileReader.readAsDataURL(f);
+      }
+      console.log(files);
+    });
+  } else {
+    alert("Your browser doesn't support to File API")
+  }
+});
     </script>
 @endsection
