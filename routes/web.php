@@ -36,7 +36,7 @@ Route::group([
     Route::resource('car_category'    , 'CarCategoryController');
     Route::resource('type_category'   , 'TypeCategoryController');
     Route::resource('filter_category' , 'FilterCategoryController');
-    Route::resource('charts' , 'ChartController');
+    //Route::resource('charts' , 'ChartController');
     Route::resource('orders' , 'MainOrderController');
 });
 
