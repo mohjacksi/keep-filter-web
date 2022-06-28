@@ -1,12 +1,12 @@
 @extends('dashboard.layouts.masterDash')
-@section('title') بيانات المستخدم - {{$user->title}} @endsection
+@section('title') بيانات المستخدم - {{$user->name}} @endsection
 @section('content')
     
 <br><br><br>
 <div class="card card-custom gutter-b">
     <div class="card-header">
         <div class="card-title">
-            <h3 class="card-label">بيانات عامه</h3>
+            <h3 class="card-label">بيانات المستخدم - {{$user->name}}</h3>
         </div>
     </div>
     <div class="card-body">
@@ -51,26 +51,26 @@
                 <table class="table table-bordered mb-6">
                     <tbody>
                         <tr class="table-active">
-                            <th>معرف الاعلان</th>
-                            <th>عنوان الاعلان</th>
-                            <th>وصف الاعلان</th>
+                            <th>معرف المستخدم</th>
+                            <th>رقم الهاتف</th>
+                            <th>عنوان المستخدم</th>
                         </tr>
                         <tr>
                             <td>#{{$user->id}}</td>
-                            <td>{{$user->title}}</td>
-                            <td>{{$user->description}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->location}}</td>
                         </tr>
                         
 
                         <tr class="table-active">
-                            <th>الكود</th>
-                            <th> الكميه لكل كرتونه</th>
-                            <th>السعر</th>
+                            <th>Soon</th>
+                            <th>Soon</th>
+                            <th>Soon</th>
                         </tr>
                         <tr>
-                            <td>{{$user->code}}</td>
-                            <td>{{$user->quantity}}</td>
-                            <td>{{$user->price}}</td>
+                            <td>{{$user->id}}</td>                            
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->id}}</td>
                         </tr>
                         <tr class="table-active">
                             <th>تاريخ الاضافه</th>
@@ -100,12 +100,13 @@
 
 
 
-{{-- <div class="card card-custom gutter-b">
+<div class="card card-custom gutter-b">
     <div class="card-header">
         <div class="card-title">
-            <h3 class="card-label">الصور</h3>
+            <h3 class="card-label">السله الخاصه بالمستخدم - {{$user->name}}</h3>
         </div>
     </div>
+
     <div class="card-body">
         <!--begin::Example-->
         <div class="example mb-12">
@@ -113,19 +114,59 @@
                 <table class="table table-bordered mb-6">
                     <tbody>
                         <tr class="table-active">
-                            <th colspan="{{count($user->Images)}}">الصور</th>
+                            <th>عدد المنتجات</th>
+                            <th>تاريخ الانشاء</th>
+                            <th>اخر تحديث</th>
                         </tr>
-
                         <tr>
-                            @foreach ($user->Images as $image)
-                                <td>
-                                    <img src="{{asset('dashboard/images/products/' . $user->id . '/' . $image->image)}}" width="200px"  alt="{{$user->title}}">
-                                </td>
-                            @endforeach
+                            <td>{{count($user->charts())}}</td>
+                            <td>{{$user->charts()->first()->created_at->format('Y-m-d , H:i')}}</td>
+                            <td>{{$user->charts()->last()->updated_at->format('Y-m-d , H:i')}}</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            
+        </div>
 
+        
+        <!--end::Example-->
+    </div>
+
+    <div class="card-body">
+        <!--begin::Example-->
+        <div class="example mb-12">
+            <div class="table-responsive">
+                <table class="table table-hover mb-6">
+                    <thead>
+                        <tr class="table-active">
+                            <th scope="col">#</th>
+                            <th scope="col">عنوان الاعلان</th>
+                            <th scope="col">الكود</th>
+                            <th scope="col">السعر</th>
+                            <th scope="col">الكميه</th>
+                            <th scope="col">الإجمالي</th>
+                            <th scope="col">اجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @forelse ($user->charts() as  $index=>$product)
+                        <tr>
+                            <td>{{$index +1}}</td>
+                            <td>{{$product->product->title}}</td>
+                            <td>{{$product->product->code}}</td>
+                            <td>{{$product->product->price}}</td>
+                            <td>{{$product->product->quantity}}</td>
+                            <td>{{$product->product->price * $product->product->quantity}}</td>
+                            <td>
+                                    <a href="{{route('products.show',$product)}}" class="btn btn-success"><i class="fas fa-search"></i></a>
+                            </td>
+                        </tr>
+                    @empty
+                        <h2 class="bg-warning">سله المستخدم فارغه</h2>
+                    @endforelse
+                    </tbody>
+                </table>
             </div>
             
         </div>
@@ -135,7 +176,7 @@
     </div>
 
     
-</div> --}}
+</div>
 
 
 

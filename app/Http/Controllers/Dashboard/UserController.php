@@ -86,9 +86,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        //dd($user->charts()->first()->id);
+        return view('dashboard.users.Show_User',compact('user'));
     }
 
     /**

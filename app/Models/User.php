@@ -16,27 +16,8 @@ class User extends Authenticatable
         HasFactory,
         Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'api_token',
-    ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+
 
     /**
      * The attributes that should be cast.
@@ -57,5 +38,16 @@ class User extends Authenticatable
         $this->save();
         // $data = ['code' => $this->code, 'username' => $this->name, 'phone' => $this->phone];
         return $this;
+    }
+
+
+    /**
+     * Get all of the charts for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function charts()
+    {
+        return $this->hasMany(Chart::class, 'user_id', 'id')->get();
     }
 }
