@@ -116,7 +116,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											<i class="fas fa-asterisk"></i>
 											<!--end::Svg Icon-->
 										</span>
-                                    <span class="menu-text">{{-- {{auth()->user()->name}} --}}  Auth Username Here</span>
+                                    <span class="menu-text">مرحبا :- {{auth()->user()->name}}</span>
                                     <i class="menu-arrow"></i>
                                 </a>
                                 <div class="menu-submenu">
