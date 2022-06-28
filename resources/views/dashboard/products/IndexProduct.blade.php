@@ -35,6 +35,7 @@
 @endsection
 @section('content')
 <div class="card card-custom gutter-b">
+    <br><br><br>
     <div class="card-header">
         <div class="card-title">
             <h3 class="card-label">المنتجات</h3>
