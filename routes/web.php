@@ -33,6 +33,7 @@ Route::group([
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     ROute::resource('users'           , 'UserController');
+    Route::PUT('deleteImage'          , 'UserController@deleteImage')->name('product.deleteImage');
     Route::get('admins'               , 'UserController@indexAdmin')->name('admin.index');
     Route::resource('products'        , 'ProductController');
     Route::POST('insertImage'          , 'ProductController@insertImage')->name('products.insertImage');

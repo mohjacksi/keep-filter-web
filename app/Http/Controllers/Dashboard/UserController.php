@@ -54,7 +54,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($requist->all());
+
+        /* $t = bcrypt('asdasdasd');
+        dd($t); */
         $user = new User;
         
         if($request->type == 'admin'){

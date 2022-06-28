@@ -41,7 +41,7 @@
         </div>
         <div class="card-toolbar">
             <!--begin::Button-->
-            @include('dashboard.products.createProductModal')
+            @include('dashboard.products.CreateProductModal')
             <!--end::Button-->
         </div>
     </div>

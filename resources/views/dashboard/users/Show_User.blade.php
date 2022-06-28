@@ -160,7 +160,7 @@
                             <td>{{$chart->product->price * $chart->product->quantity}}</td>
                             <td>
                                 <a href="{{route('products.show',$chart)}}" class="btn btn-success"><i class="fas fa-search"></i></a>
-                                <form method="POST" style="display: inline;" {{-- action="{{route('charts.destroy',$chart->id)}}" --}} >
+                                <form method="POST" style="display: inline;" action="{{route('destroy_chart_product',$chart)}}" >
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('هل انت متاكد من ازاله المنتج من السله !!!');" ><i class="fas fa-trash"></i></button>

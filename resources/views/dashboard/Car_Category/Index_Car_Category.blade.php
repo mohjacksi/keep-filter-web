@@ -9,7 +9,7 @@
         </div>
         <div class="card-toolbar">
             <!--begin::Button-->
-            @include('dashboard.Car_category.Create_Car_Category_Modal')
+            @include('dashboard.Car_Category.Create_Car_Category_Modal')
             <!--end::Button-->
         </div>
     </div>
@@ -71,7 +71,9 @@
                             <td><img src="{{asset('dashboard/images/categories/car_images/'.$carCategory->img)}}" width="100px" height="100px" alt="{{$carCategory->name}}"></td>
                             <td>{{$carCategory->created_at->format('Y-m-d')}}</td>
                             <td>
+                                
                                 <a href="{{route('car_category.show' , $carCategory)}}" class="btn btn-success"><i class="fas fa-search"></i></a>
+                                @include('dashboard.Car_Category.Edit_Car_Category_Modal')
                                 <form method="POST" style="display: inline;" action="{{route('car_category.destroy',$carCategory->id)}}" >
                                     @csrf
                                     @method('DELETE')

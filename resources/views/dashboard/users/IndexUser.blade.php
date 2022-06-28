@@ -73,7 +73,7 @@
                             <td>{{$user->created_at->format('Y-m-d')}}</td>
                             <td>
                                 @include('dashboard.users.Edit_User_Modal')
-                                <a href="{{route('type_category.show',$user)}}" class="btn btn-info"><i class="fa fa-search" ></i></a>
+                                <a href="{{route('users.show',$user)}}" class="btn btn-info"><i class="fa fa-search" ></i></a>
                                 <form method="POST" style="display: inline;" action="{{route('users.destroy',$user->id)}}" >
                                     @csrf
                                     @method('DELETE')
