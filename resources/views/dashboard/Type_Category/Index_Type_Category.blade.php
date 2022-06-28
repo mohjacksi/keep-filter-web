@@ -9,7 +9,7 @@
         </div>
         <div class="card-toolbar">
             <!--begin::Button-->
-            @include('dashboard.Type_category.Create_Type_Category_Modal')
+            @include('dashboard.Type_Category.Create_Type_Category_Modal')
             <!--end::Button-->
         </div>
     </div>
@@ -68,7 +68,7 @@
                             <td>{{$typeCategory->name}}</td>
                             <td>{{$typeCategory->created_at->format('Y-m-d')}}</td>
                             <td>
-                                @include('dashboard.Type_category.Edit_Type_Category_Modal')
+                                @include('dashboard.Type_Category.Edit_Type_Category_Modal')
                                 <a href="{{route('type_category.show',$typeCategory)}}" class="btn btn-info"><i class="fa fa-search" ></i></a>
                                 <form method="POST" style="display: inline;" action="{{route('type_category.destroy',$typeCategory->id)}}" >
                                     @csrf
