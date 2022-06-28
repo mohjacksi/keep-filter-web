@@ -150,16 +150,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @forelse ($user->charts() as  $index=>$product)
+                    @forelse ($user->charts() as  $index=>$chart)
                         <tr>
                             <td>{{$index +1}}</td>
-                            <td>{{$product->product->title}}</td>
-                            <td>{{$product->product->code}}</td>
-                            <td>{{$product->product->price}}</td>
-                            <td>{{$product->product->quantity}}</td>
-                            <td>{{$product->product->price * $product->product->quantity}}</td>
+                            <td>{{$chart->product->title}}</td>
+                            <td>{{$chart->product->code}}</td>
+                            <td>{{$chart->product->price}}</td>
+                            <td>{{$chart->product->quantity}}</td>
+                            <td>{{$chart->product->price * $chart->product->quantity}}</td>
                             <td>
-                                    <a href="{{route('products.show',$product)}}" class="btn btn-success"><i class="fas fa-search"></i></a>
+                                <a href="{{route('products.show',$chart)}}" class="btn btn-success"><i class="fas fa-search"></i></a>
+                                <form method="POST" style="display: inline;" {{-- action="{{route('charts.destroy',$chart->id)}}" --}} >
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('هل انت متاكد من ازاله المنتج من السله !!!');" ><i class="fas fa-trash"></i></button>
+                                </form>
                             </td>
                         </tr>
                     @empty

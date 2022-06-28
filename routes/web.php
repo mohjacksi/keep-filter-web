@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dash');
+});
+
+Route::get('home', function () {
+    return redirect('/dash');
 });
 
 
@@ -51,4 +55,3 @@ Auth::routes([
     'verify' => false, // Email Verification Routes...
   ]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
