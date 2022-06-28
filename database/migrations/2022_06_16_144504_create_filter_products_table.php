@@ -15,11 +15,10 @@ class CreateFilterProductsTable extends Migration
     {
         Schema::create('filter_products', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
             $table->integer('filter_category_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('filter_category_id')->references('id')->on('filter_categories')->onDelete('cascade');
             $table->timestamps();
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            
         });
     }
 

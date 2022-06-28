@@ -122,11 +122,13 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //dd($product->cars);
+        //$selected = explode(",", $product->cars()->id);
         $car_category     = CarCategory::all();
         $filter_category  = FilterCategory::all();
         $type_category    = TypeCategory::all();
-        return view('dashboard.products.EditProduct',compact('product','filter_category','car_category','type_category'));
+        //dd($product->cars);
+        
+        return view('dashboard.products.EditProduct',compact(/* 'selected', */'product','filter_category','car_category','type_category'));
     }
 
     /**
@@ -142,6 +144,45 @@ class ProductController extends Controller
     }
 
     /**
+     * insert the specified resource in storage.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function insertImage( Request $request)
+    {
+        $product = Product::findOrFail($request->product_id);
+        //dd($product);
+        foreach ($request->images as $data) {
+
+            $postImage = new Image;
+            $imageName =  $product->id.  '_' . rand(11111, 99999) . time() . '.' .  $data->getClientOriginalName();
+            $postImage->image = $imageName;
+            $postImage->Product_id = $product->id;
+            $postImage->save();
+            $data->move(public_path('dashboard/images/products/' . $product->id . '/'), $imageName);
+
+        }
+        return back()->with(['insert' => 'done']);
+    }
+
+    /**
+     * delete the specified resource in storage.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteImage( Request $request)
+    {
+        $img = Image::findOrFail($request->img_id);
+        //dd($img->product_id);
+        
+        \File::delete(public_path('dashboard/images/products/' . $img->product_id . '/' . $img->image));
+        $img->delete();
+        return back()->with(['delete' => 'done']);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Product  $product
@@ -152,23 +193,23 @@ class ProductController extends Controller
 
 
 
-        dd($product->Cars);
+        //dd($product->Cars);
 
             //destroy filters data
-            foreach($product->Filters as $filter){
+           /*  foreach($product->Filters as $filter){
                     $filter->delete();
             }
 
             // destroy cars data
             foreach($product->Cars as $car){
                 $car->delete();
-            }   
+            }  */  
 
 
             foreach($product->Images as $img){
-                \File::delete(public_path('dashboard/images/products/' . $product->id . '/' . $img->image));
                 $img->delete();
             }
+            \File::deleteDirectory(public_path('dashboard/images/products/' . $product->id));
             $product->delete();
             return back()->with(['delete' => 'done']);
 

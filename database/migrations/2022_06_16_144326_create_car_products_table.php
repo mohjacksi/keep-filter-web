@@ -13,14 +13,16 @@ class CreateCarProductsTable extends Migration
      */
     public function up()
     {
+
         Schema::create('car_products', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
             $table->integer('car_category_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('car_category_id')->references('id')->on('car_categories')->onDelete('cascade');
             $table->timestamps();
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
         });
+    
+    
+
     }
 
     /**

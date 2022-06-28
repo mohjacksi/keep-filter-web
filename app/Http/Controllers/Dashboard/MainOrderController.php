@@ -19,7 +19,8 @@ class MainOrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Main_order::all();
+        dd($orders);
     }
 
     /**

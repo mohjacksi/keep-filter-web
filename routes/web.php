@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::group([
     'prefix'    => 'dash',
     'namespace' => 'Dashboard',
-    //'middleware' => ['auth','role:user'],
+    'middleware' => ['auth','role:admin'],
 
 ], function() {
     
@@ -31,9 +31,13 @@ Route::group([
     ROute::resource('users'           , 'UserController');
     Route::get('admins'               , 'UserController@indexAdmin')->name('admin.index');
     Route::resource('products'        , 'ProductController');
+    Route::POST('insertImage'          , 'ProductController@insertImage')->name('products.insertImage');
+    Route::PUT('deleteImage'          , 'ProductController@deleteImage')->name('product.deleteImage');
     Route::resource('car_category'    , 'CarCategoryController');
     Route::resource('type_category'   , 'TypeCategoryController');
     Route::resource('filter_category' , 'FilterCategoryController');
+    Route::resource('charts' , 'ChartController');
+    Route::resource('orders' , 'MainOrderController');
 });
 
 
